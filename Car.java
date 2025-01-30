@@ -12,9 +12,13 @@ public class Car implements Movable {
 
     public Car(int nrdoors, Color incolor, double enginepower, String modelname){
         nrDoors = nrdoors;
-        color = incolor;
         enginePower = enginepower;
+        currentSpeed = 0;
+        color = incolor;
         modelName = modelname;
+        turningAngle = 90;
+        x = 0;
+        y = 0;
         stopEngine();
     }
 
@@ -38,7 +42,7 @@ public class Car implements Movable {
         color = clr;
     }
 
-    public void startEngine(){ currentSpeed= 0.1; }
+    public void startEngine(){ currentSpeed = 0.1; }
 
     public void stopEngine(){ currentSpeed = 0; }
 
@@ -52,31 +56,30 @@ public class Car implements Movable {
         currentSpeed = Math.max(getCurrentSpeed() - speedFactor() * amount,0);
     }
 
+    public void gas(double amount){
+        if(amount <= 1 && amount >= 0){ incrementSpeed(amount); }
+    }
+
+    public void brake(double amount){
+        if(amount <= 1 && amount >= 0) decrementSpeed(amount);
+    }
+
     // Använder currentSpeed från objektet samt turningAngle för att bestämma hastighet och riktning
    public void move() {
         double rad = Math.toRadians(turningAngle);
-        x += currentSpeed * Math.cos(rad);
-        y += currentSpeed * Math.sin(rad);
-
+        x += Math.round((currentSpeed * Math.cos(rad)) * 1000.0) / 1000.0;
+        y += Math.round((currentSpeed * Math.sin(rad)) * 1000.0) / 1000.0;
    }
 
       // Ändrar turningAngle negativt för att simulera svängning mot vänster
     public void turnLeft(int angle) {
         if (angle > 180) { angle -= 180; }
-        turningAngle -= (angle);
+        turningAngle += (angle);
     }
 
     // Ändrar turningAngle positivt för att simulera svängning mot höger
    public void turnRight(int angle) {
        if (angle > 180) { angle -= 180; }
-        turningAngle += (angle);
+        turningAngle -= (angle);
    }
-
-    public void gas(double amount){
-        if(amount < 1 && amount > 0) incrementSpeed(amount);
-    }
-
-    public void brake(double amount){
-        if(amount < 1 && amount > 0) decrementSpeed(amount);
-    }
 }

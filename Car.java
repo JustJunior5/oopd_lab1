@@ -49,7 +49,7 @@ public class Car implements Movable {
     protected double speedFactor(){ return enginePower * 0.01; }
 
     public void incrementSpeed(double amount){
-        currentSpeed = Math.min(getCurrentSpeed() + speedFactor() * amount,enginePower);
+        currentSpeed = Math.min(getCurrentSpeed() + speedFactor() * amount, enginePower);
     }
 
     public void decrementSpeed(double amount){
@@ -57,11 +57,15 @@ public class Car implements Movable {
     }
 
     public void gas(double amount){
-        if(amount <= 1 && amount >= 0){ incrementSpeed(amount); }
+        if(amount <= 1 && amount >= 0){
+            incrementSpeed(amount);
+        }
     }
 
     public void brake(double amount){
-        if(amount <= 1 && amount >= 0) decrementSpeed(amount);
+        if(amount <= 1 && amount >= 0) {
+            decrementSpeed(amount);
+        }
     }
 
     // Använder currentSpeed från objektet samt turningAngle för att bestämma hastighet och riktning
@@ -71,15 +75,25 @@ public class Car implements Movable {
         y += Math.round((currentSpeed * Math.sin(rad)) * 1000.0) / 1000.0;
    }
 
-      // Ändrar turningAngle negativt för att simulera svängning mot vänster
+      // Ändrar turningAngle positiv för att simulera svängning mot vänster
     public void turnLeft(int angle) {
-        if (angle > 180) { angle -= 180; }
-        turningAngle += (angle);
+        if (angle > 180) {
+            angle = 180;
+        }
+        turningAngle += angle;
+        if (turningAngle >= 360) {
+            turningAngle -= 360;
+        }
     }
 
-    // Ändrar turningAngle positivt för att simulera svängning mot höger
+    // Ändrar turningAngle negativ för att simulera svängning mot höger
    public void turnRight(int angle) {
-       if (angle > 180) { angle -= 180; }
-        turningAngle -= (angle);
+       if (angle > 180) {
+           angle = 180;
+       }
+       turningAngle -= angle;
+       if (turningAngle >= 360) {
+           turningAngle -= 360;
+       }
    }
 }

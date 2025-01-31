@@ -75,6 +75,22 @@ class CarTest {
 
         assertEquals(volvo.x, volvo.y);
     }
+
+    @Test
+    void testGas(){
+        saab.startEngine();
+        saab.gas(1.0);
+
+        assertTrue(saab.currentSpeed > 0.1);
+    }
+
+    @Test
+    void testBrake(){
+        volvo.startEngine();
+        volvo.brake(1.0);
+
+        assertTrue(volvo.currentSpeed < 0.1);
+    }
 }
 
 

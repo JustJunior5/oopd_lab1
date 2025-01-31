@@ -42,18 +42,24 @@ public class Car implements Movable {
         color = clr;
     }
 
-    public void startEngine(){ currentSpeed = 0.1; }
+    public void startEngine(){
+        currentSpeed = 0.1;
+    }
 
-    public void stopEngine(){ currentSpeed = 0; }
+    public void stopEngine(){
+        currentSpeed = 0;
+    }
 
-    protected double speedFactor(){ return enginePower * 0.01; }
+    protected double speedFactor(){
+        return enginePower * 0.01;
+    }
 
     public void incrementSpeed(double amount){
         currentSpeed = Math.min(getCurrentSpeed() + speedFactor() * amount, enginePower);
     }
 
     public void decrementSpeed(double amount){
-        currentSpeed = Math.max(getCurrentSpeed() - speedFactor() * amount,0);
+        currentSpeed = Math.max(getCurrentSpeed() - speedFactor() * amount, 0);
     }
 
     public void gas(double amount){

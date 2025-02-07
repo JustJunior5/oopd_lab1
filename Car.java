@@ -19,7 +19,6 @@ public class Car implements Movable {
         turningAngle = 90;
         x = 0;
         y = 0;
-        stopEngine();
     }
 
     public int getNrDoors(){

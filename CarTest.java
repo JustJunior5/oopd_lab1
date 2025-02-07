@@ -24,7 +24,7 @@ class CarTest {
         saab.setTurboOn();
         assertEquals(1.3, saab.turbo);
 
-        saab.gas(1); //Borde bli 1.3
+        saab.gas(1); //Borde bli 1.725
         assertEquals(1.725, saab.currentSpeed);
 
         saab.move();

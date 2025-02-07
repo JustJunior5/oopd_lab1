@@ -18,7 +18,7 @@ public class Saab95 extends Car{
 	    turbo = 1;
     }
 
-    public double speedFactor(){
+    protected double speedFactor() {
         return super.speedFactor() * turbo;
     }
 }

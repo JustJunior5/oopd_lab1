@@ -1,14 +1,16 @@
 import java.awt.*;
 
 public class Car implements Movable {
-    public int nrDoors; // Number of doors on the car
-    public double enginePower; // Engine power of the car
-    public double currentSpeed; // The current speed of the car
-    public Color color; // Color of the car
-    public String modelName; // The car model name
-    public int turningAngle;
-    public double x;
-    public double y;
+
+    //TODO everything should be private
+    private int nrDoors; // Number of doors on the car
+    private double enginePower; // Engine power of the car
+    private double currentSpeed; // The current speed of the car
+    private Color color; // Color of the car
+    private String modelName; // The car model name
+    private int turningAngle;
+    private double x;
+    private double y;
 
     public Car(int nrdoors, Color incolor, double enginepower, String modelname){
         nrDoors = nrdoors;
@@ -41,6 +43,18 @@ public class Car implements Movable {
         color = clr;
     }
 
+    public int getTurningAngle(){
+        return turningAngle;
+    }
+
+    public double getX(){
+        return x;
+    }
+
+    public double getY(){
+        return y;
+    }
+
     public void startEngine(){
         currentSpeed = 0.1;
     }
@@ -49,15 +63,18 @@ public class Car implements Movable {
         currentSpeed = 0;
     }
 
+    //TODO Could be abstract, not saying this is necessarily wrong but abstract is a bit more skill expressive
     protected double speedFactor(){
         return enginePower * 0.01;
     }
 
-    public void incrementSpeed(double amount){
+    //TODO should be private
+    private void incrementSpeed(double amount){
         currentSpeed = Math.min(getCurrentSpeed() + speedFactor() * amount, enginePower);
     }
 
-    public void decrementSpeed(double amount){
+    //TODO should be private
+    private void decrementSpeed(double amount){
         currentSpeed = Math.max(getCurrentSpeed() - speedFactor() * amount, 0);
     }
 
@@ -97,8 +114,9 @@ public class Car implements Movable {
            angle = 180;
        }
        turningAngle -= angle;
-       if (turningAngle >= 360) {
-           turningAngle -= 360;
+
+       if (turningAngle < 0){
+           turningAngle += 360;
        }
    }
 }

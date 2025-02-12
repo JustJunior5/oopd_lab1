@@ -195,8 +195,13 @@ class CarTest {
         assertEquals(volvo.getY(),2.7);
 
         Car_Transport transport2 = new Car_Transport();
-        transport.rampUp();
+        transport.turnRight(90);
+        move(); move(); move();
+        transport.loadCar(transport,transport2);
         transport2.startEngine();
+        transport.loadCar(transport,transport2);
+        transport.rampUp();
+        transport.loadCar(transport,transport2);
         transport.startEngine();
         transport.loadCar(transport,transport2);
         assertEquals( 0, transport.getCarList().size());

@@ -22,7 +22,6 @@ public class Car_Transport extends Car{
     }
     public void loadCar(Car_Transport transport, Car car){
         if(deltaDist(car, transport) < 2 && deltaDist(car, transport) > -2 && getCurrentSpeed() == 0 && !rampIsUp && car.getCurrentSpeed() == 0 && !Objects.equals(car.getModelName(), "Transporter")){
-            car.stopEngine();
             loadedCars.add(car);
             car.move();
         }

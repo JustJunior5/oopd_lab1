@@ -57,6 +57,11 @@ public class Car implements Movable {
         return y;
     }
 
+    public void setPosition(double newX, double newY){
+        x = newX;
+        y = newY;
+    }
+
     public void startEngine(){
         currentSpeed = 0.1;
     }

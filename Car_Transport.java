@@ -10,7 +10,11 @@ public class Car_Transport extends Car{
         super(2, Color.orange, 80, "Transporter");
         stopEngine();
     }
-    
+
+    public ArrayList<Car> getCarList(){
+        return loadedCars;
+    }
+
     public void startEngine(){
         if(rampIsUp) super.startEngine();
     }
@@ -24,7 +28,7 @@ public class Car_Transport extends Car{
     }
     
     public void loadCar(Car_Transport transport, Car car){
-        if(deltaDist(car, transport) < 2 && deltaDist(car, transport) > -2 && getCurrentSpeed() == 0 && !rampIsUp && car.getCurrentSpeed() == 0 && !Objects.equals(car.getModelName(), "Transporter")){
+        if(deltaDist(car, transport) < 2 && getCurrentSpeed() == 0 && !rampIsUp && car.getCurrentSpeed() == 0 && !Objects.equals(car.getModelName(), "Transporter")){
             loadedCars.add(car);
             car.setPosition(getX(),getY());
         }

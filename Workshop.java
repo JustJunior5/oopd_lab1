@@ -2,7 +2,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Workshop<C extends Car> {
-    public List<C> stored;
+    private List<C> stored;
     private int capacity;
 
 
@@ -10,6 +10,11 @@ public class Workshop<C extends Car> {
         stored = new ArrayList<>();
         capacity = cap;
     }
+
+    public List<C> getStored() {
+        return stored;
+    }
+
     // Attempts to store car if not already present in storage and storage is not full
     public void storeCar(C car){
         if (stored.contains(car)) {
@@ -32,15 +37,4 @@ public class Workshop<C extends Car> {
         System.out.println(car.getClass().getSimpleName() + " is not in workshop");
         }
     }
-    /*
-     @Test
-    void testWorkshop(){
-        Volvo240 volvo240 = new Volvo240();
-        Workshop<Volvo240> volvo240Workshop = new Workshop<>(5);
-        volvo240Workshop.storeCar(volvo240);
-        assertTrue(volvo240Workshop.stored.contains(volvo240));
-        volvo240Workshop.removeCar(volvo240);
-        assertFalse(volvo240Workshop.stored.contains(volvo240));
-    }
-     */
 }

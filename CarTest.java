@@ -10,12 +10,14 @@ class CarTest {
     private Saab95 saab;
     private Volvo240 volvo;
     private Scania scania;
+    private Car_Transport transport;
 
     @BeforeEach
     void createCar() {
         saab = new Saab95();
         volvo = new Volvo240();
         scania = new Scania();
+        transport = new Car_Transport();
     }
 
     @Test
@@ -106,16 +108,26 @@ class CarTest {
 
         scania.raiseBed(1);
         scania.startEngine();
+        scania.gas(1);
 
         assertEquals(0, scania.getCurrentSpeed());
 
         scania.lowerBed(1);
         scania.startEngine();
         scania.gas(1);
+        scania.lowerBed(1);
 
         assertEquals(0.9, scania.getCurrentSpeed());
 
         scania.raiseBed(1);
+        assertEquals(0, scania.getBedAngle());
+
+        scania.stopEngine();
+
+        scania.raiseBed(80);
+        assertEquals(70, scania.getBedAngle());
+
+        scania.lowerBed(80);
         assertEquals(0, scania.getBedAngle());
 
     }
@@ -148,6 +160,59 @@ class CarTest {
 
         volvo.setColor(Color.green);
         assertEquals(Color.green, volvo.getColor());
+    }
+
+    @Test
+    void testTransporter(){
+        transport.startEngine();
+        assertEquals(transport.getCurrentSpeed(),0);
+
+        transport.rampUp();
+        transport.startEngine();
+
+        assertEquals(transport.getCurrentSpeed(),0.1);
+
+        transport.stopEngine();
+        transport.rampDown();
+        transport.loadCar(transport, volvo);
+
+        assertEquals(transport.getCarList().getFirst().getModelName(),"Volvo240");
+
+        transport.rampUp();
+        transport.startEngine();
+        transport.gas(1);
+        transport.rampDown();
+        transport.move();
+        transport.move();
+        transport.move();
+        saab.startEngine();
+        transport.loadCar(transport, saab);
+        transport.turnLeft(135);
+        transport.turnRight(45);
+        transport.unloadCar();
+
+        assertEquals(volvo.getY(),2.7);
+    }
+
+    @Test
+    void testWorkshop(){
+        Workshop<Volvo240> volvo240Workshop = new Workshop<>(1);
+
+        Volvo240 volvo2 = new Volvo240();
+
+        volvo240Workshop.storeCar(volvo);
+        assertTrue(volvo240Workshop.getStored().contains(volvo));
+
+        volvo240Workshop.storeCar(volvo);
+
+        volvo240Workshop.storeCar(volvo2);
+        assertEquals(1, volvo240Workshop.getStored().size());
+
+        volvo240Workshop.removeCar(volvo);
+        assertFalse(volvo240Workshop.getStored().contains(volvo));
+
+        volvo240Workshop.removeCar(volvo);
+        assertEquals(0, volvo240Workshop.getStored().size());
     }
 }
 

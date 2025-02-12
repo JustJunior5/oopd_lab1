@@ -185,13 +185,20 @@ class CarTest {
         transport.move();
         transport.move();
         transport.move();
-        saab.startEngine();
         transport.loadCar(transport, saab);
         transport.turnLeft(135);
         transport.turnRight(45);
+        transport.stopEngine();
+        transport.rampDown();
         transport.unloadCar();
-
         assertEquals(volvo.getY(),2.7);
+
+        Car_Transport transport2 = new Car_Transport();
+        transport.rampUp();
+        transport2.startEngine();
+        transport.startEngine();
+        transport.loadCar(transport,transport2);
+        assertEquals( 0, transport.getCarList().size());
     }
 
     @Test

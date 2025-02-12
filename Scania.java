@@ -2,7 +2,7 @@ import java.awt.*;
 
 public class Scania extends Car {
 
-    public int bedAngle = 0;
+    private int bedAngle = 0;
 
     public Scania() {
         super(2, Color.blue, 80, "Scania");

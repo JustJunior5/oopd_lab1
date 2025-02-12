@@ -9,11 +9,13 @@ class CarTest {
 
     private Saab95 saab;
     private Volvo240 volvo;
+    private Scania scania;
 
     @BeforeEach
     void createCar() {
         saab = new Saab95();
         volvo = new Volvo240();
+        scania = new Scania();
     }
 
     @Test
@@ -101,6 +103,12 @@ class CarTest {
 
         saab.gas(-3.0);
         assertEquals(saab.getCurrentSpeed(), speed);
+
+        scania.startEngine();
+        scania.raiseBed(1);
+        scania.gas(1);
+
+        assertEquals(0.1, scania.getCurrentSpeed());
     }
 
     @Test

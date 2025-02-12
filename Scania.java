@@ -32,6 +32,8 @@ public class Scania extends Car {
     }
 
     public void gas(double amount){
-
+        if (bedAngle > 0){      //speedfactor?
+            return;
+        }
     }
 }

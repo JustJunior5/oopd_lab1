@@ -152,7 +152,8 @@ class CarTest {
         startEngine();
         gas(1);
         move();
-        turnleft(90);
+        turnLeft(135);
+        turnRight(45);
         unloadCar();
         assertEquals(volvo.getY(),0.9);
     }

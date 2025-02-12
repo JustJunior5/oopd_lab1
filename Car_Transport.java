@@ -37,7 +37,7 @@ public class Car_Transport extends Car{
         Car unloadedCar = loadedCars.getLast();
         if(getCurrentSpeed() == 0 && !rampIsUp){
             loadedCars.remove(unloadedCar);
-            unloadedCar.setPosition(getX() - 2*Math.cos(getTurningAngle()), getY() - 2*Math.sin(getTurningAngle()));
+            unloadedCar.setPosition(getX() - 2 * (Math.round(Math.cos(Math.toRadians(getTurningAngle())) * 1000.0) / 1000.0), getY() - 2 * (Math.round(Math.sin(Math.toRadians(getTurningAngle())) * 1000.0) / 1000.0));
         }
     }
     

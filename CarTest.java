@@ -123,6 +123,7 @@ class CarTest {
         assertEquals(0, scania.getBedAngle());
 
         scania.stopEngine();
+        scania.gas(1);
 
         scania.raiseBed(80);
         assertEquals(70, scania.getBedAngle());
@@ -179,19 +180,45 @@ class CarTest {
         assertEquals(transport.getCarList().getFirst().getModelName(),"Volvo240");
 
         transport.rampUp();
+        transport.unloadCar();
         transport.startEngine();
         transport.gas(1);
+        transport.unloadCar();
         transport.rampDown();
+
+        assertEquals(0.9, transport.getCurrentSpeed());
+
         transport.move();
+        assertEquals(volvo.getY(),0.9);
+
         transport.move();
+        assertEquals(volvo.getY(),1.8);
+
         transport.move();
-        saab.startEngine();
+        assertEquals(volvo.getY(),2.7);
+
         transport.loadCar(transport, saab);
+
         transport.turnLeft(135);
         transport.turnRight(45);
+
+        assertEquals(180, transport.getTurningAngle());
+
+        transport.stopEngine();
+        transport.rampDown();
         transport.unloadCar();
 
+        assertEquals(2.7, transport.getY());
         assertEquals(volvo.getY(),2.7);
+
+        Car_Transport transport2 = new Car_Transport();
+
+        transport.rampUp();
+        transport2.startEngine();
+        transport.startEngine();
+        transport.loadCar(transport,transport2);
+
+        assertEquals( 0, transport.getCarList().size());
     }
 
     @Test

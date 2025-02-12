@@ -181,6 +181,7 @@ class CarTest {
         transport.rampUp();
         transport.startEngine();
         transport.gas(1);
+        transport.unloadCar();
         transport.rampDown();
         transport.move();
         transport.move();

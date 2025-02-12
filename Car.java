@@ -23,6 +23,8 @@ public class Car implements Movable {
         y = 0;
     }
 
+    public String getModelName(){ return modelName; }
+
     public int getNrDoors(){
         return nrDoors;
     }
@@ -55,6 +57,11 @@ public class Car implements Movable {
         return y;
     }
 
+    public void setPosition(double newX, double newY){
+        x = newX;
+        y = newY;
+    }
+
     public void startEngine(){
         currentSpeed = 0.1;
     }
@@ -79,7 +86,7 @@ public class Car implements Movable {
     }
 
     public void gas(double amount){
-        if(amount <= 1 && amount >= 0){
+        if(amount <= 1 && amount >= 0 && getCurrentSpeed() > 0){
             incrementSpeed(amount);
         }
     }
@@ -88,6 +95,10 @@ public class Car implements Movable {
         if(amount <= 1 && amount >= 0) {
             decrementSpeed(amount);
         }
+    }
+
+    public double deltaDist(Car a, Car b){
+        return Math.sqrt(Math.pow(a.getX() - b.getX(),2) + Math.pow(a.getY() - b.getY(),2));
     }
 
     // Använder currentSpeed från objektet samt turningAngle för att bestämma hastighet och riktning

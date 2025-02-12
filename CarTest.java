@@ -104,11 +104,20 @@ class CarTest {
         saab.gas(-3.0);
         assertEquals(saab.getCurrentSpeed(), speed);
 
-        scania.startEngine();
         scania.raiseBed(1);
+        scania.startEngine();
+
+        assertEquals(0, scania.getCurrentSpeed());
+
+        scania.lowerBed(1);
+        scania.startEngine();
         scania.gas(1);
 
-        assertEquals(0.1, scania.getCurrentSpeed());
+        assertEquals(0.9, scania.getCurrentSpeed());
+
+        scania.raiseBed(1);
+        assertEquals(0, scania.getBedAngle());
+
     }
 
     @Test

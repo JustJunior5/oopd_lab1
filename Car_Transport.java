@@ -51,7 +51,7 @@ public class Car_Transport extends Car{
         Car unloadedCar = loadedCars.getLast();
         if(getCurrentSpeed() == 0 && !rampIsUp){
             loadedCars.remove(unloadedCar);
-            unloadedCar.x;
+            //unloadedCar.x;
         }
     }
 }

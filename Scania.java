@@ -9,6 +9,10 @@ public class Scania extends Car {
         stopEngine();
     }
 
+    public int getBedAngle(){
+        return bedAngle;
+    }
+
     public void raiseBed(int amount){
         if (getCurrentSpeed() != 0){
             return;
@@ -31,9 +35,17 @@ public class Scania extends Car {
         }
     }
 
-    public void gas(double amount){
-        if (bedAngle > 0){      //speedfactor?
+    public void startEngine(){
+        if (bedAngle > 0){
             return;
         }
+        super.startEngine();
+    }
+
+    public void gas(double amount){
+        if (bedAngle > 0){
+            return;
+        }
+        super.gas(amount);
     }
 }

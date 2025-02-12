@@ -14,6 +14,7 @@ class CarTest {
     void createCar() {
         saab = new Saab95();
         volvo = new Volvo240();
+        transport = new Car_Transport();
     }
 
     @Test
@@ -131,6 +132,29 @@ class CarTest {
 
         volvo.setColor(Color.green);
         assertEquals(Color.green, volvo.getColor());
+    }
+    
+    @Test
+    void testTransporter(){
+        transport.startEngine();
+        assertEquals(getCurrentSpeed(),0);
+
+        rampUp();
+        transport.startEngine();
+        assertEquals(getCurrentSpeed(),0.1);
+        transport.stopEngine();
+
+        rampDown();
+        loadCar(volvo);
+        assertEquals(transport.loadedCars[0].getModelName(),'Volvo240');
+
+        rampUp();
+        startEngine();
+        gas(1);
+        move();
+        turnleft(90);
+        unloadCar();
+        assertEquals(volvo.getY(),0.9);
     }
 }
 

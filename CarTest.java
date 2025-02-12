@@ -212,10 +212,10 @@ class CarTest {
         assertEquals(volvo.getY(),2.7);
 
         Car_Transport transport2 = new Car_Transport();
+        transport = new Car_Transport();
 
-        transport.turnRight(90);
-        move(); move(); move();
         transport.loadCar(transport,transport2);
+        transport2.rampUp();
         transport2.startEngine();
         transport.loadCar(transport,transport2);
         transport.rampUp();
@@ -223,7 +223,7 @@ class CarTest {
         transport.startEngine();
         transport.loadCar(transport,transport2);
 
-        assertEquals( 0, transport.getCarList().size());
+        assertEquals(0, transport.getCarList().size());
     }
 
     @Test
@@ -245,6 +245,15 @@ class CarTest {
 
         volvo240Workshop.removeCar(volvo);
         assertEquals(0, volvo240Workshop.getStored().size());
+
+        Workshop<Car> carWorkshop = new Workshop<>(3);
+        carWorkshop.storeCar(volvo);
+        carWorkshop.storeCar(saab);
+        carWorkshop.storeCar(scania);
+
+        assertTrue(carWorkshop.getStored().contains(volvo));
+        assertTrue(carWorkshop.getStored().contains(saab));
+        assertTrue(carWorkshop.getStored().contains(scania));
     }
 }
 

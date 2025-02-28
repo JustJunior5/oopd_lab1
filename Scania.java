@@ -48,4 +48,9 @@ public class Scania extends Car {
         }
         super.gas(amount);
     }
+
+    @Override
+    protected double speedFactor() {
+        return 0.005 * getEnginePower();
+    }
 }

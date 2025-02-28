@@ -1,6 +1,6 @@
 import java.awt.*;
 
-public class Car implements Movable {
+public abstract class Car implements Movable {
 
     //TODO everything should be private
     private int nrDoors; // Number of doors on the car
@@ -71,9 +71,7 @@ public class Car implements Movable {
     }
 
     //TODO Could be abstract, not saying this is necessarily wrong but abstract is a bit more skill expressive
-    protected double speedFactor(){
-        return enginePower * 0.01;
-    }
+    protected abstract double speedFactor();
 
     //TODO should be private
     private void incrementSpeed(double amount){

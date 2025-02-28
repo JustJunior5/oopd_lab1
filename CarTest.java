@@ -10,14 +10,14 @@ class CarTest {
     private Saab95 saab;
     private Volvo240 volvo;
     private Scania scania;
-    private Car_Transport transport;
+    private CarTransport transport;
 
     @BeforeEach
     void createCar() {
         saab = new Saab95();
         volvo = new Volvo240();
         scania = new Scania();
-        transport = new Car_Transport();
+        transport = new CarTransport();
     }
 
     @Test
@@ -175,7 +175,7 @@ class CarTest {
 
         transport.stopEngine();
         transport.rampDown();
-        transport.loadCar(transport, volvo);
+        transport.loadCar(volvo);
 
         assertEquals(transport.getCarList().getFirst().getModelName(),"Volvo240");
 
@@ -197,7 +197,7 @@ class CarTest {
         transport.move();
         assertEquals(volvo.getY(),2.7);
 
-        transport.loadCar(transport, saab);
+        transport.loadCar(saab);
 
         transport.turnLeft(135);
         transport.turnRight(45);
@@ -211,17 +211,17 @@ class CarTest {
         assertEquals(2.7, transport.getY());
         assertEquals(volvo.getY(),2.7);
 
-        Car_Transport transport2 = new Car_Transport();
-        transport = new Car_Transport();
+        CarTransport transport2 = new CarTransport();
+        transport = new CarTransport();
 
-        transport.loadCar(transport,transport2);
+        transport.loadCar(transport2);
         transport2.rampUp();
         transport2.startEngine();
-        transport.loadCar(transport,transport2);
+        transport.loadCar(transport2);
         transport.rampUp();
-        transport.loadCar(transport,transport2);
+        transport.loadCar(transport2);
         transport.startEngine();
-        transport.loadCar(transport,transport2);
+        transport.loadCar(transport2);
 
         assertEquals(0, transport.getCarList().size());
     }
@@ -256,5 +256,3 @@ class CarTest {
         assertTrue(carWorkshop.getStored().contains(scania));
     }
 }
-
-

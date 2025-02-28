@@ -2,11 +2,11 @@ import java.awt.*;
 import java.util.ArrayList;
 import java.util.Objects;
 
-public class Car_Transport extends Car{
+public class CarTransport extends Car{
     private Boolean rampIsUp = false;
     private ArrayList<Car> loadedCars = new ArrayList<Car>();
     
-    public Car_Transport(){
+    public CarTransport(){
         super(2, Color.orange, 80, "Transporter");
         stopEngine();
     }
@@ -26,13 +26,19 @@ public class Car_Transport extends Car{
             rampIsUp = false;
         }
     }
+
+    @Override
+    protected double speedFactor() {
+        return 0.005 * getEnginePower();
+    }
     
-    public void loadCar(Car_Transport transport, Car car){
-        if(deltaDist(car, transport) < 2 && getCurrentSpeed() == 0 && !rampIsUp && car.getCurrentSpeed() == 0 && !Objects.equals(car.getModelName(), "Transporter")){
+    public void loadCar(Car car){
+        if(deltaDist(car, this) < 2 && getCurrentSpeed() == 0 && !rampIsUp && car.getCurrentSpeed() == 0 && !Objects.equals(car.getModelName(), "Transporter")){
             loadedCars.add(car);
             car.setPosition(getX(),getY());
         }
     }
+
     public void unloadCar(){
         Car unloadedCar = loadedCars.getLast();
         if(getCurrentSpeed() == 0 && !rampIsUp){
